@@ -26,5 +26,9 @@ python.exe -m pip install -r requirements.txt
 sudo pip install -r requirements.txt
 ```
 Usage 🚀
-
 ----------
+![exifharvester_usage](https://github.com/msegoviag/exifharvester/assets/41863090/e78507ee-3933-4d84-a0a8-5d9750452484)
+
+
+
+
