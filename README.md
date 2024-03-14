@@ -10,3 +10,18 @@
 ```bash
 git clone https://github.com/msegoviag/exifharvester.git
 ```
+
+Dependencies 🛠️
+----------
+The following external libraries may need to be installed: `urllib3`, `requests`, `beautifulsoup4` and `Pillow`
+
+These dependencies can be installed using the requirements.txt file:
+
+- Installation on Windows:
+```
+python.exe -m pip install -r requirements.txt
+```
+- Installation on Linux and MacOS
+```
+sudo pip install -r requirements.txt
+```
