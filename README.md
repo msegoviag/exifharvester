@@ -28,7 +28,11 @@ sudo pip install -r requirements.txt
 ```
 Usage 🚀
 ----------
-![exifharvester_usage](https://github.com/msegoviag/exifharvester/assets/41863090/e78507ee-3933-4d84-a0a8-5d9750452484)
+<p align="center">
+
+  <img src="https://github.com/msegoviag/exifharvester/assets/41863090/0f54aef9-5b99-461a-a4cd-5f0edd9b16f0" style="max-width: 100%; height: auto; object-fit: cover; display: inline-block;" data-target="animated-image.originalImage">
+
+
 
 
 
