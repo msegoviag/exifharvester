@@ -12,7 +12,7 @@
 - Download all images from a website in a few seconds
 - INPUT supported: STDIN, URL and LIST
 - OUTPUT supported: FILE
-- Detecting images with EXIF GPS metadata is a valid vulnerability in BUG BOUNTY PROGRAMS!
+- Detecting images with EXIF GPS metadata is a valid vulnerability in BUG BOUNTY PROGRAMS! (P3 -P4): "EXIF Geolocation Data Not Stripped From Uploaded Images"
 
 Installation ⚙️
 ----------
@@ -84,7 +84,7 @@ Examples of use 💡
 
 ### API
 `python exifharvester.py -u dpreview.com -api 0` (The Nominatim API is not used) <br>
-`python exifharvester.py -u dpreview.com -api 1` (The use of the Nominatim API is enforced.)
+`python exifharvester.py -u dpreview.com -api 1` (The use of the Nominatim API is enforced)
 
 ### Print the help
 `python exifharvester.py -h` 
