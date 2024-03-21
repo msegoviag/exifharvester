@@ -11,6 +11,7 @@
 - Nominatim API integration for fast location detection
 - Download all images from a website in a few seconds
 - INPUT supported: STDIN, URL and LIST
+- OUTPUT supported: FILE
 - Detecting images with EXIF GPS metadata is a valid vulnerability in BUG BOUNTY PROGRAMS!
 
 Installation ⚙️
