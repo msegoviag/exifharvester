@@ -63,7 +63,7 @@ Examples of use 💡
 ### Scan local images
 `python exifharvester.py -l 1337.jpg`
 
-### Download the images and save the results of the EXIF images 
+### Download the images and save the EXIF results 
 `python exifharvester.py -u dpreview.com -s DownloadedImages -o results.txt`
 
 ### Display raw EXIF data 
