@@ -5,7 +5,15 @@
   <b>Automatic tool for extracting EXIF metadata from website images and sets of URLs.
   A perfect tool for bug hunters and OSINT researchers.</b><br>
 
-  Installation ⚙️
+  Features 🪄
+----------
+- Get EXIF metadata from website images quickly and in real-time
+- Nominatim API integration for fast location detection
+- Download all images from a website in a few seconds
+- INPUT supported: STDIN, URL and LIST
+- Detecting images with EXIF GPS metadata is a valid vulnerability in BUG BOUNTY PROGRAMS!
+
+Installation ⚙️
 ----------
 
 ```bash
@@ -35,9 +43,53 @@ Usage 🚀
 Examples of use 💡
 ----------
 ### Scan a website
-`python exifharvester.py -u youtube.com` 
+`python exifharvester.py -u dpreview.com`
+
+### Scan a website (STDIN)
+`echo dpreview.com | python exifharvester.py`
+`cat urls.txt | python exifharvester.py`
+
+### Scan a website (LIST)
+`python exifharvester.py -f urls.txt`
+
+### Scan local images
+`python exifharvester.py -l 1337.jpg`
+
+### Download the images and save the results of the EXIF images 
+`python exifharvester.py -u dpreview.com -s DownloadedImages -o results.txt`
+
+### Display raw EXIF data 
+`python exifharvester.py -u dpreview.com --raw`
+
+### Set Cookie for authentication issues
+`python exifharvester.py -u test.com -C PHPSESSID=e1faf854faf7fa62f1`
+
+### Set new User-Agent
+`python exifharvester.py -u test.com -ua "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"`
+
+### Set proxy
+`python exifharvester.py -u test.com -p 127.0.0.1:8118`
+
+### Threads
+`python exifharvester.py -u dpreview.com -t 15`
+
+### Scan a website and crawling
+`python exifharvester.py -u dpreview.com -cr`<br>
+`python exifharvester.py -u dpreview.com -cr -d 4` (depth)
+
+### Ignore errors
+`python exifharvester.py -u dpreview.com -i 1` (ignore errors and shows informative results) <br>
+`python exifharvester.py -u dpreview.com -i 2` (silent)
+
+### API
+`python exifharvester.py -u dpreview.com -api 0` (The Nominatim API is not used) <br>
+`python exifharvester.py -u dpreview.com -api 1` (The use of the Nominatim API is enforced.)
+
 ### Print the help
 `python exifharvester.py -h` 
 
+Disclaimer of responsibility 🚨
+----------
 
+Usage of this program for attacking targets without consent is illegal. It is the user's responsibility to obey all applicable laws. The developer assumes no liability and is not responsible for any misuse or damage caused by this program. Please use responsibly.
 
