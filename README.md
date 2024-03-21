@@ -47,7 +47,7 @@ Examples of use 💡
 `python exifharvester.py -u dpreview.com`
 
 ### Scan a website (STDIN)
-`echo dpreview.com | python exifharvester.py`
+`echo dpreview.com | python exifharvester.py`<br>
 `cat urls.txt | python exifharvester.py`
 
 ### Scan a website (LIST)
