@@ -10,6 +10,7 @@
 - Get EXIF metadata from website images quickly and in real-time
 - Nominatim API integration for fast location detection
 - Download all images from a website in a few seconds
+- Base64 image support
 - INPUT supported: STDIN, URL and LIST
 - OUTPUT supported: FILE
 - Detecting images with EXIF GPS metadata is a valid vulnerability in BUG BOUNTY PROGRAMS! (P3 -P4): "EXIF Geolocation Data Not Stripped From Uploaded Images"
@@ -18,7 +19,13 @@ Installation ⚙️
 ----------
 
 ```bash
-git clone https://github.com/msegoviag/exifharvester.git
+git clone https://github.com/msegoviag/exifharvester.git 
+```
+```bash
+cd exifharvester
+```
+```bash
+python exifharvester.py -u dpreview.com -i 1
 ```
 
 Dependencies 🛠️
