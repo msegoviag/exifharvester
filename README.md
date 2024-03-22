@@ -94,7 +94,11 @@ Examples of use 💡
 `python exifharvester.py -u dpreview.com -api 1` (The use of the Nominatim API is enforced)
 
 ### Print the help
-`python exifharvester.py -h` 
+`python exifharvester.py -h`
+
+## License
+
+Exifharvester is licensed under the GNU GPL license. take a look at the [LICENSE](https://github.com/msegoviag/exifharvester/blob/main/README.md) for more information.
 
 Disclaimer of responsibility 🚨
 ----------
