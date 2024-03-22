@@ -98,7 +98,7 @@ Examples of use 💡
 
 ## License ⚖️
 
-Exifharvester is licensed under the GNU GPL license. take a look at the [LICENSE](https://github.com/msegoviag/exifharvester/blob/main/README.md) for more information.
+Exifharvester is licensed under the GNU GPL license. take a look at the [LICENSE](https://github.com/msegoviag/exifharvester/blob/main/LICENSE.txt) for more information.
 
 Disclaimer of responsibility 🚨
 ----------
