@@ -69,7 +69,7 @@ Examples of use 💡
 ### Display raw EXIF data 
 `python exifharvester.py -u dpreview.com --raw`
 
-### Set Cookie for authentication issues
+### Set Cookie for auth
 `python exifharvester.py -u test.com -C PHPSESSID=e1faf854faf7fa62f1`
 
 ### Set new User-Agent
