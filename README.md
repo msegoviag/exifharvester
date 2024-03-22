@@ -96,7 +96,7 @@ Examples of use 💡
 ### Print the help
 `python exifharvester.py -h`
 
-## License
+## License ⚖️
 
 Exifharvester is licensed under the GNU GPL license. take a look at the [LICENSE](https://github.com/msegoviag/exifharvester/blob/main/README.md) for more information.
 
