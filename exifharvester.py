@@ -8,6 +8,7 @@ import json
 import time
 import base64
 import urllib3
+import warnings
 import requests
 import argparse
 import urllib.parse
@@ -34,6 +35,7 @@ HTTP_PREFIX = 'http://'
 HTTPS_PREFIX = 'https://'
 Image.MAX_IMAGE_PIXELS = None
 urllib3.disable_warnings(InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 
 exif_counters = {'with_exif': 0, 'without_exif': 0, 'with_relevant_exif': 0, 'excluded': 0}
 processed_images = set()
