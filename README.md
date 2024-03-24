@@ -103,7 +103,8 @@ Examples of use 💡
 
 ## ToDo ⛏️
 
-Selenium support for detecting images that are dynamically loaded with Javascript, a common behaviour in several frameworks.
+- Selenium support for detecting images that are dynamically loaded with Javascript, a common behaviour in several frameworks.
+- More refactor.
 
 ## License ⚖️
 
