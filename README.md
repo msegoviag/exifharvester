@@ -96,7 +96,7 @@ Examples of use 💡
 ### Print the help
 `python exifharvester.py -h`
 
-### Support this project
+## Support this project 🤑
 
 <p dir="auto"><a href="https://www.buymeacoffee.com/msegoviag
 " rel="nofollow"><img src="https://camo.githubusercontent.com/151fc5b863df6c6ee657ce46b0308a7cde0e9af5fb7b2b1a244af1f9b4350161/68747470733a2f2f63646e2e6275796d6561636f666665652e636f6d2f627574746f6e732f76322f64656661756c742d677265656e2e706e67" data-canonical-src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" style="max-width: 100%;"></a></p>
@@ -105,8 +105,7 @@ Examples of use 💡
 
 Exifharvester is licensed under the GNU GPL license. take a look at the [LICENSE](https://github.com/msegoviag/exifharvester/blob/main/LICENSE.txt) for more information.
 
-Disclaimer of responsibility 🚨
-----------
+## Disclaimer of responsibility 🚨
 
 Usage of this program for attacking targets without consent is illegal. It is the user's responsibility to obey all applicable laws. The developer assumes no liability and is not responsible for any misuse or damage caused by this program. Please use responsibly.
 
