@@ -71,7 +71,7 @@ Examples of use 💡
 `python exifharvester.py -u dpreview.com --raw`
 
 ### Set Cookie for auth
-`python exifharvester.py -u test.com -C PHPSESSID=e1faf854faf7fa62f1`
+`python exifharvester.py -u test.com -c PHPSESSID=e1faf854faf7fa62f1`
 
 ### Set new User-Agent
 `python exifharvester.py -u test.com -ua "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"`
