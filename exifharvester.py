@@ -444,7 +444,6 @@ def save_base64_image(base64_str, save_folder):
     try:
         image_data = decode_base64_image(base64_str)
         image = Image.open(BytesIO(image_data))
-        
         # Create a unique file name based on the current time and save the image
         file_name = "image_{}.png".format(int(time.time()))
         file_path = os.path.join(save_folder, file_name)
@@ -549,7 +548,7 @@ def process_single_image(image_url, processed_images, proxy=None, raw=False, out
             if raw:
                 formatted_metadata = format_raw_metadata(metadata)
                 print_metadata(image_url, formatted_metadata, output_file)
-            elif not ignore_errors == 2:
+            elif ignore_errors != 2:
                 print(f"ℹ️ Image {image_url} has EXIF but no relevant metadata found.\n")
     else:
         exif_counters['without_exif'] += 1
@@ -765,18 +764,19 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--file", help="Path to a text file containing image URLs.", default=None)
     parser.add_argument("-t", "--threads", type=int, default=1, help="Number of threads for concurrent processing.")
     parser.add_argument("-ua", "--user_agent", help="Specify a custom User-Agent for HTTP requests.", default=None)
-
-    args = parser.parse_args()
-
-    headers = {'User-Agent': args.user_agent} if args.user_agent else {}
-    session.headers.update(headers)
     
-    exclude_paths = []
-    if args.exclude:
-        for item in args.exclude:
-            exclude_paths.extend([path.strip() for path in item.split(',')])
-
-    if sys.stdin.isatty():
-        main(args.url, args.raw, args.output, args.proxy, args.user_agent, args.crawler, args.local, args.cookie, args.save, args.depth, args.file, args.threads, args.ignore)
-    else:
-        main_from_stdin(args.raw, args.output, args.proxy, args.user_agent, args.crawler, args.cookie, args.save, args.depth, args.threads, args.ignore)
+    args = parser.parse_args()
+    
+    try:
+        exclude_paths = []
+        if args.exclude:
+            for item in args.exclude:
+                exclude_paths.extend([path.strip() for path in item.split(',')])
+                
+        if sys.stdin.isatty():
+            main(args.url, args.raw, args.output, args.proxy, args.user_agent, args.crawler, args.local, args.cookie, args.save, args.depth, args.file, args.threads, args.ignore)
+        else:
+            main_from_stdin(args.raw, args.output, args.proxy, args.user_agent, args.crawler, args.cookie, args.save, args.depth, args.threads, args.ignore)
+    except KeyboardInterrupt:
+        print("\n🛑 Exiting gracefully...")
+        print_final_statistics(processed_images, exif_counters)
