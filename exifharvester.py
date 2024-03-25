@@ -181,8 +181,7 @@ def extract_images_general(html, base_url):
             
     return image_urls
 
-def get_image_urls(base_url, proxy=None, ignore_errors=0, user_agent=None):
-    
+def get_image_urls(base_url, proxy=None, ignore_errors=0, user_agent=None, exclude_paths=None):
     base_url = ensure_url_scheme(base_url)
     if proxy:
         session.proxies.update({'http': f'http://{proxy}', 'https': f'http://{proxy}'})
@@ -219,8 +218,13 @@ def get_image_urls(base_url, proxy=None, ignore_errors=0, user_agent=None):
         all_image_urls = image_urls_specific.union(image_urls_general)
         filtered_image_urls = set()
 
+        if exclude_paths is None:
+            exclude_paths = [] 
+      
+        exclude_regex = re.compile('|'.join(map(re.escape, exclude_paths)), re.IGNORECASE) if exclude_paths else None
+
         for url in all_image_urls:
-            if (not url.lower().endswith(('.svg', '.svg+xml'))):
+            if (not url.lower().endswith(('.svg', '.svg+xml'))) and (not exclude_regex.search(url) if exclude_regex else True):
                 filtered_image_urls.add(url)
             else:
                 exif_counters['excluded'] += 1
@@ -588,7 +592,7 @@ def crawler_main(base_url, proxy=None, raw=False, output_file=None, cookie=None,
             internal_links = get_internal_links(current_url, visited_urls, proxy, depth=len(visited_urls), cookie=cookie, user_agent=user_agent, max_depth=max_depth, exclude_paths=exclude_paths)
             urls_to_visit.update(link for link in internal_links if link not in visited_urls)
 
-            image_urls = get_image_urls(current_url, proxy, ignore_errors)
+            image_urls = get_image_urls(current_url, proxy, ignore_errors, exclude_paths=args.exclude)
             for image_url in image_urls:
                 if image_url not in processed_images:
                     process_single_image(image_url, processed_images, proxy, raw, output_file, save, save_folder, ignore_errors)
@@ -638,7 +642,8 @@ def download_and_save_image_wrapper(args):
     download_and_save_image(*args)
 
 def process_images_concurrently(url, raw, output_file, processed_images, proxy, save, save_folder, max_threads=5, ignore_errors=0):
-    image_urls = get_image_urls(url,proxy,ignore_errors)
+    
+    image_urls = get_image_urls(url, proxy, ignore_errors, user_agent=None, exclude_paths=args.exclude)
 
     if not image_urls:
         return False
