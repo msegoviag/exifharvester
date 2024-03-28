@@ -9,6 +9,7 @@
 ----------
 - Get EXIF metadata from website images quickly and in real-time
 - Nominatim API integration for fast location detection
+- Automatic detection of URLs containing images
 - Download all images from a website in a few seconds
 - Crawling support
 - Base64 image support
