@@ -25,7 +25,7 @@ banner = """
  | |__    \ V /   | |  | |__   | |__| |   /  \   | |__) |\ \  / / | |__   | (___     | |   | |__   | |__) |
  |  __|    > <    | |  |  __|  |  __  |  / /\ \  |  _  /  \ \/ /  |  __|   \___ \    | |   |  __|  |  _  / 
  | |____  / . \  _| |_ | |     | |  | | / ____ \ | | \ \   \  /   | |____  ____) |   | |   | |____ | | \ \ 
- |______|/_/ \_\|_____||_|     |_|  |_|/_/    \_\|_|  \_\   \/    |______||_____/    |_|   |______||_|  \_\     v1.0                                                                                                                                                                                                
+ |______|/_/ \_\|_____||_|     |_|  |_|/_/    \_\|_|  \_\   \/    |______||_____/    |_|   |______||_|  \_\     v1.1                                                                                                                                                                                                
 """
 
 # Session object to keep cookies between requests
@@ -157,14 +157,47 @@ def extract_image_from_source_tag(source_tag, base_url):
         return ensure_absolute_url(decoded_url, base_url) if first_source_url else None
     else:
         return None
+def extract_images_from_json_strings(text, base_url):
+    
+    image_urls = set()
+    json_strings = re.findall(r'({[^{}]+})', text)
 
+    for json_str in json_strings:
+        try:
+            json_data = json.loads(json_str)
+            extracted_urls = extract_image_urls_from_any_json(json_data)
+            for url in extracted_urls:
+                absolute_url = ensure_absolute_url(url, base_url)
+                image_urls.add(absolute_url)
+        except json.JSONDecodeError:
+            continue  
+
+    return image_urls
+
+def extract_image_urls_from_any_json(data):
+    
+    if isinstance(data, dict):
+        for value in data.values():
+            for url in extract_image_urls_from_any_json(value):
+                yield url
+    elif isinstance(data, list):
+        for item in data:
+            for url in extract_image_urls_from_any_json(item):
+                yield url
+    elif isinstance(data, str) and looks_like_image_url(data):
+        yield data
+        
+def looks_like_image_url(url):
+   
+    return re.search(r'\.(jpg|jpeg|png|gif|bmp|svg|ico|webp)$', url, re.IGNORECASE) is not None    
+    
 def extract_images_general(html, base_url):
     image_urls = set()
 
     patterns = [
         r'<img[^>]+src="([^"]+)"',
         r'<link[^>]+href="([^"]+\.(jpg|jpeg|png|gif|bmp|svg|ico|webp))"[^>]*>',
-        r'<meta[^>]+content="([^"]+\.(jpg|jpeg|png|gif|bmp|svg|ico|webp))"[^>]*>', 
+        r'<meta[^>]+content="([^"]+\.(jpg|jpeg|png|gif|bmp|svg|ico|webp))"[^>]*>',
         r'src=\\"([^"]+)\\"',
         r'background-image:\s*url\((?:\'([^\']+)\'|\"([^\"]+)\"|([^\'\"\)]+))\)',
         r'url\(([^)]+\.(jpg|jpeg|png|gif|bmp|svg|ico|webp))\)',
@@ -212,10 +245,12 @@ def get_image_urls(base_url, proxy=None, ignore_errors=0, user_agent=None, exclu
                 image_url = extractor(tag_instance, base_url)
                 if image_url:
                     image_urls_specific.add(image_url)
+        
+        json_image_urls = extract_images_from_json_strings(html, base_url)
 
         image_urls_general = extract_images_general(html, base_url)
 
-        all_image_urls = image_urls_specific.union(image_urls_general)
+        all_image_urls = image_urls_specific.union(image_urls_general).union(json_image_urls)
         filtered_image_urls = set()
 
         if exclude_paths is None:
@@ -642,7 +677,6 @@ def download_and_save_image_wrapper(args):
     download_and_save_image(*args)
 
 def process_images_concurrently(url, raw, output_file, processed_images, proxy, save, save_folder, max_threads=5, ignore_errors=0):
-    
     image_urls = get_image_urls(url, proxy, ignore_errors, user_agent=None, exclude_paths=args.exclude)
 
     if not image_urls:
